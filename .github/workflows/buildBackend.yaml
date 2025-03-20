@@ -1,4 +1,4 @@
-name: Node.js Build
+name: Backend install and build check
 
 on:
     push:
@@ -15,7 +15,7 @@ jobs:
             - name: Set up Node.js
               uses: actions/setup-node@v4
               with:
-                    node-version: '16'
+                    node-version: 'current'
                     check-latest: true
             
             - name: Install dependencies

@@ -1,4 +1,4 @@
-name: Node.js Build
+name: Frontend install and build check
 
 on:
     push:

@@ -1,5 +1,5 @@
 var express = require("express");
-var pty = require('node-pty-prebuilt-multiarch');
+var pty = require('node-pty');
 var app = express();
 var expressWs = require('express-ws')(app);  // TODO: decide on which websocket lib we use (probably express)
 var cors = require('cors')
@@ -31,7 +31,13 @@ function getLocalIP(){
 }
 
 var mirte_name = fs.readFileSync('/etc/hostname', 'utf8').trim();
-var mirte_password = fs.readFileSync('/home/mirte/.wifi_pwd', 'utf8').trim();
+var mirte_password;
+try {
+  mirte_password = fs.readFileSync('/home/mirte/.wifi_pwd', 'utf8').trim();
+} catch (err) {
+  console.error("Error reading password file, using default password:", err);
+  mirte_password = "mirte_mirte"; // Set your desired default password here
+}
 
 app.use(bodyParser.json())
 app.use(cookieSession({
