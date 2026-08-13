@@ -1,0 +1,123 @@
+{
+  "motor": {
+    "text": "motor",
+    "pins": {
+      "p1": "pwm",
+      "p2": "pwm"
+    },
+    "functions": [
+      "setMotorSpeed"
+    ],
+    "default_value": {
+      "name": "SPEED",
+      "type": "math_number",
+      "field": "NUM",
+      "value": 0
+    },
+    "rel_path": "Actuators\\Motor\\pwm_motor\\pwm_motor.py",
+    "service_type": "mirte_msgs/SetMotorSpeed",
+    "service_value": "speed",
+    "service_name": "set_speed"
+  },
+  "line": {
+    "text": "line",
+    "pins": {
+      "digital": "digital",
+      "analog": "analog"
+    },
+    "functions": [
+      "getLine"
+    ],
+    "rel_path": "Sensors\\IR_sensor\\digital_ir_sensor\\digital_ir_sensor.py",
+    "message_type": "mirte_msgs/Intensity",
+    "message_value": "value"
+  },
+  "object": {
+    "text": "object",
+    "pins": {
+      "digital": "digital"
+    },
+    "functions": [
+      "getObject"
+    ],
+    "rel_path": "Sensors\\IR_sensor\\digital_ir_sensor\\digital_ir_sensor.py",
+    "message_type": "mirte_msgs/IntensityDigital",
+    "message_value": "value"
+  },
+  "color": {
+    "text": "color",
+    "pins": {
+      "scl": "digital",
+      "sda": "digital"
+    },
+    "functions": [
+      "getColor"
+    ],
+    "rel_path": "Sensors\\color_sensor\\color_sensor\\color_sensor.py",
+    "message_type": "mirte_msgs/ColorHSLStamped",
+    "message_value": "color"
+  },
+  "distance": {
+    "text": "distance",
+    "pins": {
+      "trigger": "digital",
+      "echo": "digital"
+    },
+    "functions": [
+      "getDistance"
+    ],
+    "rel_path": "Sensors\\IR_sensor\\ultrasound_distance_sensor\\ultrasound_distance_sensor.py",
+    "message_type": "sensor_msgs/Range",
+    "message_value": "range"
+  },
+  "servo": {
+    "text": "servo",
+    "pins": {
+      "pin": "digital"
+    },
+    "functions": [
+      "setServoAngle"
+    ],
+    "default_value": {
+      "name": "ANGLE",
+      "type": "math_number",
+      "field": "NUM",
+      "value": 90
+    },
+    "rel_path": "Actuators\\Servo\\servo\\servo.py",
+    "service_type": "mirte_msgs/SetServoAngle",
+    "service_value": "angle",
+    "service_name": "set_angle"
+  },
+  "oled": {
+    "text": "oled",
+    "pins": {
+      "scl": "digital",
+      "sda": "digital"
+    },
+    "functions": [
+      "setOled"
+    ],
+    "default_value": {
+      "name": "VALUE",
+      "type": "text",
+      "field": "TEXT",
+      "value": "Hi"
+    },
+    "rel_path": "Actuators\\OLED\\oled\\oled.py",
+    "service_type": "mirte_msgs/SetOLEDText",
+    "service_name": "set_text"
+  },
+  "keypad": {
+    "text": "keypad",
+    "pins": {
+      "pin": "analog"
+    },
+    "functions": [
+      "getKeypad"
+    ],
+    "rel_path": "Sensors\\Keypad\\keypad\\keypad.py",
+    "message_type": "mirte_msgs/Keypad",
+    "message_value": "key"
+  }
+}
