@@ -1,5 +1,5 @@
 var express = require("express");
-var pty = require('node-pty');
+var pty = require('@homebridge/node-pty-prebuilt-multiarch');
 var app = express();
 var expressWs = require('express-ws')(app);  // TODO: decide on which websocket lib we use (probably express)
 var cors = require('cors')
@@ -35,8 +35,9 @@ var mirte_password;
 try {
   mirte_password = fs.readFileSync('/home/mirte/.wifi_pwd', 'utf8').trim();
 } catch (err) {
-  console.error("Error reading password file, using default password:", err);
   mirte_password = "mirte_mirte"; // Set your desired default password here
+  console.error("Error reading password file, using default password:", mirte_password, err);
+  
 }
 
 app.use(bodyParser.json())
