@@ -191,6 +191,23 @@ expressWs.app.ws('/shell', (ws, req) => {
     ws.on('message', (msg) => {
         shell.write(msg);
     });
+
+    ws.on('close', () => {
+      console.log(`Closing shell ${shell.pid}`);
+
+      try {
+        process.kill(-shell.pid, 'SIGHUP');
+      } catch (err) {
+        shell.kill();
+      }
+    });
+
+    shell.on('exit', () => {
+      if (ws.readyState === WebSocket.OPEN) {
+        ws.close();
+      }
+    });
+
 });
 
 

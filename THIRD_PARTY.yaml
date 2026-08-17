@@ -1,0 +1,76 @@
+codemirror/lang-python:
+  - version: 6.2.1
+  - license: MIT
+  - website: https://registry.npmjs.org/@codemirror/lang-python/-/lang-python-6.2.1.tgz
+fortawesome/fontawesome-svg-core:
+  - version: 7.0.1
+  - license: MIT
+  - website: https://registry.npmjs.org/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-7.0.1.tgz
+fortawesome/free-solid-svg-icons:
+  - version: 7.0.1
+  - license: (CC-BY-4.0 AND MIT)
+  - website: https://registry.npmjs.org/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-7.0.1.tgz
+fortawesome/vue-fontawesome:
+  - version: 3.1.2
+  - license: MIT
+  - website: https://registry.npmjs.org/@fortawesome/vue-fontawesome/-/vue-fontawesome-3.1.2.tgz
+nuxt/fonts:
+  - version: 0.12.1
+  - license: MIT
+  - website: https://registry.npmjs.org/@nuxt/fonts/-/fonts-0.12.1.tgz
+nuxt/image:
+  - version: 2.0.0
+  - license: MIT
+  - website: https://registry.npmjs.org/@nuxt/image/-/image-2.0.0.tgz
+pinia/nuxt:
+  - version: 0.11.3"
+  - license: MIT
+  - website: https://registry.npmjs.org/@pinia/nuxt/-/nuxt-0.11.3.tgz
+xterm/addon-attach:
+  - version: 0.12.0
+  - license: MIT
+  - website: https://registry.npmjs.org/@xterm/addon-attach/-/addon-attach-0.12.0.tgz
+xterm/addon-fit:
+  - version: 0.11.0
+  - license: MIT
+  - website: https://registry.npmjs.org/@xterm/addon-fit/-/addon-fit-0.11.0.tgz
+xterm/xterm:
+  - version: 6.0.0
+  - license: MIT
+  - website: https://registry.npmjs.org/@xterm/xterm/-/xterm-6.0.0.tgz
+blockly:
+  - version: 12.0.0
+  - license: Apache-2.0
+  - website: https://registry.npmjs.org/blockly/-/blockly-12.0.0.tgz
+codemirror:
+  - version: 6.0.2
+  - license: MIT
+  - website: https://registry.npmjs.org/codemirror/-/codemirror-6.0.2.tgz
+flag-icons:
+  - version: 7.5.0
+  - license: MIT
+  - website: https://registry.npmjs.org/flag-icons/-/flag-icons-7.5.0.tgz
+js-yaml:
+  - version: 4.1.1
+  - license: MIT
+  - website: https://registry.npmjs.org/js-yaml/-/js-yaml-4.1.1.tgz
+nuxt:
+  - version: 3.15.4
+  - license: MIT
+  - website: https://registry.npmjs.org/nuxt/-/nuxt-3.15.4.tgz
+pinia:
+  - version: 3.0.4
+  - license: MIT
+  - website: https://registry.npmjs.org/pinia/-/pinia-3.0.4.tgz
+roslib:
+  - version: 2.1.0
+  - license: BSD-2-Clause
+  - website: https://registry.npmjs.org/roslib/-/roslib-2.1.0.tgz
+vue:
+  - version: 3.5.13
+  - license: MIT
+  - website: https://registry.npmjs.org/vue/-/vue-3.5.13.tgz
+vue-router:
+  - version: 4.5.0
+  - license: MIT
+  - website: https://registry.npmjs.org/vue-router/-/vue-router-4.5.0.tgz

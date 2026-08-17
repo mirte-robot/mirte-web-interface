@@ -1,0 +1,102 @@
+export class MicroPythonFS {
+  replResolver: (() => void) | null = null
+  private buffer = ""
+
+  private captureResolver: ((data: string) => void) | null = null
+  private captureBuffer = ""
+  private capturing = false
+
+  constructor(private transport) {
+    transport.onData((data: string) => this.parseData(data))
+  }
+
+  // We get the REPL data, which should be parsed on:
+  //
+  // ">>> ": detecting whether a new command can be sent
+  // "__BEGIN__": detecting when file-data is being sent
+  // "__END__": detecting when file-data ended
+  parseData(data: string) {
+    this.buffer += data
+
+    this.buffer = this.buffer.replaceAll("__HB__\r\n", "")
+
+    if (this.buffer.includes("__BEGIN__\r\n")) {
+      const marker = "__BEGIN__\r\n"
+      const idx = this.buffer.indexOf(marker)
+      this.captureBuffer = this.buffer.slice(idx + marker.length)
+      this.capturing = true
+    }
+
+    // TODO: gaat dit goed? hij heeft hem hier net op true gezet
+    if (this.capturing) {
+      this.captureBuffer += data
+    }
+
+    if (this.captureBuffer.includes("__END__\r\n")) {
+      const result = this.captureBuffer.split("__END__\r\n")[0]
+      this.capturing = false
+
+      if (this.captureResolver) {
+        this.captureResolver(result)
+        this.captureResolver = null
+      }
+
+      this.captureBuffer = ""
+    }
+
+    if (this.buffer.includes(">>> ")) {
+      if (this.replResolver) {
+        this.replResolver()
+        this.replResolver = null
+      }
+      this.buffer = ""
+    }
+  }
+
+  async waitForPrompt() {
+    return new Promise<void>((resolve) => {
+      this.replResolver = resolve
+    })
+  }
+
+  async readFile(path: string): Promise<string> {
+    return new Promise(async (resolve) => {
+      this.captureResolver = resolve
+      this.capturing = false
+      this.buffer = ""
+      this.captureBuffer = ""
+      // Needs to be a single writeLine, in order to correctly capture the __BEGIN__ (TODO: is this true?)
+      await this.writeLine(`import sys\ntry:\n\tf = open('${path}')\n\tprint('__BEGIN__')\n\t_ = sys.stdout.write(f.read())\n\tprint('__END__')\n\tf.close()\nexcept OSError:\n\tprint('__BEGIN__\\n__READ_ERROR__\\n__END__')\n`)
+    })
+  }
+
+  async removeFile(path: string) {
+    await this.writeLine(`os.remove('${path}')`)
+  }
+
+  async removeFolder(path: string) {
+    await this.writeLine(`os.rmdir('${path}')`)
+  }
+
+  async writeFile(path: string, content: string) {
+    const cleaned = content.replace(/\r/g, '')
+
+    await this.writeLine(`f = open('${path}', 'w')`)
+    for (const line of cleaned.split("\n")) {
+      const escaped = line.replace(/"/g, '\\"')
+      await this.writeLine(`f.write("${escaped}\\n")`)
+    }
+    await this.writeLine(`f.close()`)
+  }
+
+  async mkdir(path: string) {
+    await this.writeLine(`import os`)
+    await this.writeLine(`os.mkdir("${path}") if "${path}" not in os.listdir() else None`)
+  }
+
+  async writeLine(line: string) {
+    const promptPromise = this.waitForPrompt()
+    await this.transport.write(line + "\r\n")
+    await promptPromise
+  }
+}
