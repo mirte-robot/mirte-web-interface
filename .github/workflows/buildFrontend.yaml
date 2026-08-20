@@ -52,6 +52,9 @@ jobs:
         run: |          
           source node_env/bin/activate
           cd vue-frontend
+          if [[ "${{ github.repository_owner }}" == "mirte-robot" ]]; then
+             export NUXT_APP_BASE_URL=/  # Needed for deplayment on mirte.org
+          fi
           npm run generate
           rm .output/nitro.json
           tar -czvf .output/public.tar.gz .output/public/
